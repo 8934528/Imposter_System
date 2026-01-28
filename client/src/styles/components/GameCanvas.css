@@ -1,0 +1,932 @@
+.game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(26, 26, 46, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left h2 {
+  color: #4CAF50;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.room-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: #ccc;
+}
+
+.room-code {
+  font-family: monospace;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(76, 175, 80, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.round-info {
+  background: rgba(33, 150, 243, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.player-role-display {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.player-role-display.crewmate {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.player-role-display.imposter {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+  border: 1px solid rgba(255, 87, 87, 0.3);
+}
+
+.leave-game-btn {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+  border: 1px solid rgba(255, 87, 87, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.leave-game-btn:hover {
+  background: rgba(255, 87, 87, 0.3);
+}
+
+.game-content {
+  flex: 1;
+}
+
+.game-phase {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.phase-header h2 {
+  color: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.fruit-reveal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.fruit-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 600px;
+  width: 100%;
+  border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.fruit-icon {
+  font-size: 4rem;
+}
+
+.fruit-info h3 {
+  color: #ccc;
+  margin: 0 0 1rem 0;
+}
+
+.imposter-view {
+  text-align: center;
+}
+
+.imposter-text {
+  color: #ff5757;
+  font-weight: bold;
+}
+
+.hint {
+  color: #888;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.crewmate-view .fruit-name {
+  font-size: 3rem;
+  color: #4CAF50;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.player-role {
+  text-align: center;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.role-badge.crewmate {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.role-badge.imposter {
+  background: linear-gradient(135deg, #ff5757, #e64a19);
+  color: white;
+}
+
+.next-phase-btn {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.next-phase-btn:hover {
+  background: linear-gradient(135deg, #1976D2, #1565C0);
+  transform: translateY(-2px);
+}
+
+.players-status {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.players-status h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.players-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.player-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.player-status.eliminated {
+  opacity: 0.5;
+}
+
+.player-name {
+  color: #fff;
+}
+
+.player-role-badge {
+  font-size: 0.8rem;
+}
+
+.eliminated-tag {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* Word Input Styles */
+.word-input-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.imposter-instructions, .crewmate-instructions {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.imposter-instructions h3 {
+  color: #ff5757;
+  margin: 1rem 0;
+}
+
+.crewmate-instructions h3 {
+  color: #4CAF50;
+  margin: 1rem 0;
+}
+
+.fruit-highlight {
+  color: #FFC107;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.crewmate-words {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.crewmate-words h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.submitted-word {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.word-input-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.word-input-form input {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.word-input-form input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.word-input-form input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-word-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.submit-word-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+}
+
+.submit-word-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submission-status {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.submission-status h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.submitted-players {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.submitted-player {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.status {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.status.submitted {
+  color: #4CAF50;
+}
+
+.status.pending {
+  color: #FFC107;
+}
+
+/* Discussion Styles */
+.discussion-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.revealed-words h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.words-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.word-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+}
+
+.word-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.word-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.you-tag {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.word-content {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  font-weight: bold;
+  color: #FFC107;
+}
+
+.word-footer {
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.word-footer.crewmate {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.word-footer.imposter {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+}
+
+.discussion-guide {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.discussion-guide h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.discussion-guide ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.discussion-guide li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #ccc;
+}
+
+.discussion-guide li:before {
+  content: '•';
+  color: #4CAF50;
+  position: absolute;
+  left: 0;
+}
+
+.chat-box textarea {
+  width: 100%;
+  height: 100px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  resize: vertical;
+}
+
+.chat-box small {
+  display: block;
+  margin-top: 0.5rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Voting Styles */
+.voting-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.voting-instructions {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.voting-instructions h3 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.players-to-vote {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.vote-player-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.vote-player-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.vote-player-card.selected {
+  border-color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.vote-player-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.player-word {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.vote-count {
+  color: #FFC107;
+  font-weight: bold;
+}
+
+.selected-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4CAF50;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.voting-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.submit-vote-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.submit-vote-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+}
+
+.submit-vote-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clear-vote-btn {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+  border: 1px solid rgba(255, 87, 87, 0.3);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.clear-vote-btn:hover {
+  background: rgba(255, 87, 87, 0.3);
+}
+
+.voting-status {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.voting-status h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.votes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.vote-record {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+/* Results Styles */
+.results-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.fruit-reveal-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.fruit-icon-large {
+  font-size: 5rem;
+}
+
+.fruit-details h3 {
+  color: #ccc;
+  margin: 0 0 0.5rem 0;
+}
+
+.fruit-name-large {
+  font-size: 3rem;
+  color: #4CAF50;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.words-reveal {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.words-reveal h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.words-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.words-table th {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  text-align: left;
+  color: #fff;
+}
+
+.words-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+}
+
+.words-table tr.imposter-row {
+  background: rgba(255, 87, 87, 0.1);
+}
+
+.words-table tr.imposter-row td {
+  color: #ff5757;
+}
+
+.role-tag {
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.role-tag.crewmate {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.role-tag.imposter {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+}
+
+.game-outcome {
+  text-align: center;
+}
+
+.game-outcome h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.outcome-card {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.outcome-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.outcome-icon.win {
+  color: #FFD700;
+}
+
+.outcome-icon.lose {
+  color: #ff5757;
+}
+
+.outcome-icon.continue {
+  color: #2196F3;
+}
+
+.win-text {
+  color: #FFD700;
+  margin: 0 0 1rem 0;
+}
+
+.lose-text {
+  color: #ff5757;
+  margin: 0 0 1rem 0;
+}
+
+.continue-text {
+  color: #2196F3;
+  margin: 0 0 1rem 0;
+}
+
+.results-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.back-to-lobby-btn {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-to-lobby-btn:hover {
+  background: linear-gradient(135deg, #1976D2, #1565C0);
+  transform: translateY(-2px);
+}
+
+.game-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+}
+
+.alive-players {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.game-phase-indicator {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.phase-name {
+  color: #FFC107;
+  font-weight: bold;
+}
+
+.error-message {
+  background: rgba(255, 87, 87, 0.2);
+  color: #ff5757;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 87, 87, 0.3);
+  margin-top: 1rem;
+}
+
+.waiting-phase {
+  text-align: center;
+  padding: 4rem;
+}
+
+.waiting-phase h2 {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.waiting-phase button {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top: 5px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
