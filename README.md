@@ -134,12 +134,12 @@ Wrong Fruit is a multiplayer social deduction game inspired by popular imposter 
 
 ## Game Rules
 
-*Crewmates:* Must describe the fruit accurately
-*Imposters:* Must guess based on others' descriptions
-*Timers:* Discussion (60s), Voting (30s)
-*Players:* 3-10 players per room
-*Rounds:* Up to 3 rounds per game
-*Victory:* Eliminate imposter or survive all rounds
+- *Crewmates:* Must describe the fruit accurately
+- *Imposters:* Must guess based on others' descriptions
+- *Timers:* Discussion (60s), Voting (30s)
+- *Players:* 3-10 players per room
+- *Rounds:* Up to 3 rounds per game
+- *Victory:* Eliminate imposter or survive all rounds
 
 ---
 
@@ -246,6 +246,6 @@ Wrong Fruit is a multiplayer social deduction game inspired by popular imposter 
 
 ---
 
-"One word to describe them all, one vote to find them, one imposter to rule them all!"
+*One word to describe them all, one vote to find them, one imposter to rule them all!*
 
 ---
